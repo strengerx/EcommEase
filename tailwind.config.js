@@ -5,7 +5,16 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        "mont": `"Montserrat", sans-serif;`,
+        "jost": `"Jost", sans-serif;`
+      },
+      gridTemplateColumns: {
+        "auto-fit": "repeat(auto-fit, minmax(0, 1fr))",
+        "1/4": "1fr 4fr"
+      },
+    },
   },
   plugins: [],
 }

@@ -1,5 +1,5 @@
 # ECOMMEASE
-    
+
 This is a simple e-commerce application built with React, Vite, and Tailwind CSS. It
 features a product list, product details, and a shopping cart.
 
