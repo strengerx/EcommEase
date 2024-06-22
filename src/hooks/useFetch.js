@@ -6,8 +6,6 @@ const useFetch = (path, dependencies = [], options = {}) => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
-    console.log(API_BASE_URL + path);
-
     useEffect(() => {
         const fetchDataFromAPI = async () => {
             setLoading(true);
