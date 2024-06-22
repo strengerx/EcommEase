@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 const Header = () => {
     return (<header className="w-full px-16 py-3 flex items-center gap-[50px] bg-slate-200">
-        <Link className="text-2xl font-bold text-blue-800" to={"/"}>Ecomm<span className="text-yellow-500">Ease</span></Link>
+        <Link className="text-3xl font-bold text-blue-800" to={"/"}>Ecomm<span className="text-yellow-500">Ease</span></Link>
         <nav className="flex justify-between items-center w-full">
             <form className="flex bg-slate-100 rounded-md overflow-hidden w-1/2" action="">
                 <input className="px-4 py-2 outline-none border-none w-full" type="search" placeholder="Search products" />
