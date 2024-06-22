@@ -16,8 +16,9 @@ const Products = () => {
     const [limit, setLimit] = useState(10)
 
     const { data, loading } = useFetch(`/products?offset=10&limit=${limit}`, [limit])
+    console.log("fetched data is: ", data);
     const memoizedData = useMemo(() => data, [data]);
-    console.log(memoizedData);
+    console.log("memodata is:", memoizedData);
 
     return (<main className="w-full grid grid-cols-1/4 gap-4 p-4">
         <Sidebar />
