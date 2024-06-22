@@ -17,6 +17,7 @@ const Products = () => {
 
     const { data, loading } = useFetch(`/products?offset=10&limit=${limit}`, [limit])
     const memoizedData = useMemo(() => data, [data]);
+    console.log(memoizedData);
 
     return (<main className="w-full grid grid-cols-1/4 gap-4 p-4">
         <Sidebar />
