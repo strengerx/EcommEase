@@ -21,8 +21,8 @@ const Sidebar = ({ setLimit }) => {
 
     return (
         <aside className="bg-slate-200 shadow-md pt-4 pb-4 mb-6 h-full">
-            <h3 className="text-xl font-semibold text-slate-800 mb-4 px-4">Filters</h3>
-            <div className="flex flex-col items-start gap-3 mb-4 border-t-2 p-4 border-slate-100">
+            <h3 className="text-xl font-semibold text-slate-800 mb-4 px-6">Filters</h3>
+            <div className="flex flex-col items-start gap-3 mb-4 border-t-2 py-4 px-6 border-slate-100">
                 <h1 className="text-base font-medium">Limits</h1>
                 <ul>
                     {[10, 20, 30].map(limit => (
@@ -36,7 +36,7 @@ const Sidebar = ({ setLimit }) => {
                     ))}
                 </ul>
             </div>
-            <div className="flex flex-col items-start gap-3 mb-4 px-4">
+            <div className="flex flex-col items-start gap-3 mb-4 px-6">
                 <h1 className="text-base font-medium">Categories</h1>
                 <ul>
                     <li className="text-sm text-slate-600 font-medium cursor-pointer mb-2">
