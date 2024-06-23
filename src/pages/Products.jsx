@@ -24,20 +24,19 @@ const Products = () => {
     const [offset, setOffset] = useState(0)
     const [productsPath, setProductsPath] = useState("/products")
 
-    const query = new URLSearchParams({ offset, limit }).toString()
+    const customParams = searchQuery ? { title: searchQuery } : { limit, offset }
+    const query = new URLSearchParams(customParams).toString()
 
     useEffect(() => {
         setOffset(0)
         if (categoryID) {
-            setProductsPath(`/categories/${categoryID}/products?${query}`);
-        } else if (searchQuery) {
-            setProductsPath(`/products?title=${searchQuery}&${query}`);
+            setProductsPath(`/categories/${categoryID}/products`);
         } else {
-            setProductsPath(`/products?${query}`);
+            setProductsPath(`/products`);
         }
-    }, [categoryID, query, searchQuery]);
+    }, [categoryID, query]);
 
-    const { data, loading, error } = useFetch(`${productsPath}`, [limit, offset, productsPath])
+    const { data, loading, error } = useFetch(`${productsPath}?${query}`, [limit, offset, productsPath])
     const { data: totalData } = useFetch(`${productsPath}`)
     const memoizedData = useMemo(() => data, [data]);
 
