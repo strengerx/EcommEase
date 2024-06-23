@@ -18,7 +18,7 @@ const useFetch = (path, dependencies = [], options = {}) => {
                 }
                 const data = await response.json();
                 setData(data);
-                console.log(API_BASE_URL + path, data);
+                // console.log(API_BASE_URL + path, data);
             } catch (error) {
                 setError(error.message);
             } finally {

@@ -12,7 +12,8 @@ export default {
       },
       gridTemplateColumns: {
         "auto-fit": "repeat(auto-fit, minmax(0, 1fr))",
-        "1/4": "1fr 4fr"
+        "1/4": "1fr 4fr",
+        "1/2": "1fr 2fr",
       },
     },
   },

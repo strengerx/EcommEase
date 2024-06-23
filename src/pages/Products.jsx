@@ -5,7 +5,7 @@ import Sidebar from "../components/common/Sidebar"
 import Card from "../components/product/Card"
 import Loading from "../components/common/Loading"
 import Pegination from "../components/common/Pegination"
-import { useParams } from "react-router-dom"
+import { useLocation, useParams } from "react-router-dom"
 
 const Products = () => {
 
@@ -15,6 +15,9 @@ const Products = () => {
     }
 
     useMeta(metadata)
+    const currentLocation = useLocation()
+    const queryParams = new URLSearchParams(currentLocation.search)
+    const searchQuery = queryParams.get('query');
 
     const { categoryID } = useParams()
     const [limit, setLimit] = useState(10)
@@ -24,15 +27,18 @@ const Products = () => {
     const query = new URLSearchParams({ offset, limit }).toString()
 
     useEffect(() => {
+        setOffset(0)
         if (categoryID) {
-            setProductsPath(`/categories/${categoryID}/products`);
+            setProductsPath(`/categories/${categoryID}/products?${query}`);
+        } else if (searchQuery) {
+            setProductsPath(`/products?title=${searchQuery}&${query}`);
         } else {
-            setProductsPath("/products");
+            setProductsPath(`/products?${query}`);
         }
-    }, [categoryID]);
+    }, [categoryID, query, searchQuery]);
 
-    const { data, loading } = useFetch(`${productsPath}?${query}`, [limit, offset, productsPath])
-    const { data: totalData } = useFetch(`/products`)
+    const { data, loading, error } = useFetch(`${productsPath}`, [limit, offset, productsPath])
+    const { data: totalData } = useFetch(`${productsPath}`)
     const memoizedData = useMemo(() => data, [data]);
 
     return (<main className="w-full grid grid-cols-1/4 gap-4 p-4">
@@ -40,6 +46,7 @@ const Products = () => {
 
         <div id="products" className="bg-slate-200 shadow-md p-4 grid gap-4 h-svh overflow-y-auto">
             {loading && <Loading />}
+            {error && <p className="text-lg text-center">error fetching products. {error}</p>}
             {memoizedData && memoizedData.length > 0 ? memoizedData.map((product, index) => (
                 <Card product={product} key={index} />
             )) :
