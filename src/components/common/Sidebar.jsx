@@ -1,6 +1,23 @@
+import { Link } from "react-router-dom";
+import useFetch from "../../hooks/useFetch";
+
 const Sidebar = ({ setLimit }) => {
-    // const categories = ["", "electronics", "fashion", "home"];
+
     // const priceRanges = ["", "0-50", "50-100", "100-200"];
+    const { data: categories } = useFetch("/categories", [])
+    const topCategories = categories && categories.length > 0 ? categories.slice(0, 6) : [];
+
+    const toLowerEmptySpace = (str) => {
+        return str.toLowerCase().replace(/\s+/g, '');
+    }
+
+    const capitalizeWords = (str) => {
+        if (!str) return '';
+        return str
+            .split(' ')
+            .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+            .join(' ');
+    }
 
     return (
         <aside className="bg-slate-200 shadow-md pt-4 pb-4 mb-6 h-full">
@@ -14,26 +31,30 @@ const Sidebar = ({ setLimit }) => {
                             className="text-sm text-slate-600 font-medium cursor-pointer mb-2"
                             onClick={() => setLimit(limit)}
                         >
-                            {limit} products
+                            {limit} Products
+                        </li>
+                    ))}
+                </ul>
+            </div>
+            <div className="flex flex-col items-start gap-3 mb-4 px-4">
+                <h1 className="text-base font-medium">Categories</h1>
+                <ul>
+                    <li className="text-sm text-slate-600 font-medium cursor-pointer mb-2">
+                        <Link to={`/products`}> All Categories</Link>
+                    </li>
+                    {topCategories && topCategories.length > 0 && topCategories.map(category => (
+                        <li
+                            key={category.id}
+                            className="text-sm text-slate-600 font-medium cursor-pointer mb-2"
+                        >
+                            <Link to={`/products/${category.id}/${toLowerEmptySpace(category?.name)}`}>
+                                {category ? capitalizeWords(category?.name) : "All Categories"}
+                            </Link>
                         </li>
                     ))}
                 </ul>
             </div>
             {/* <div className="mb-4 px-4">
-                <label className="block mb-2 text-sm font-medium">Category</label>
-                <select
-                    onChange={(e) => setCategory(e.target.value)}
-                    className="border border-gray-300 rounded-md p-2 w-full"
-                    aria-label="Select category"
-                >
-                    {categories.map(category => (
-                        <option key={category} value={category}>
-                            {category ? category.charAt(0).toUpperCase() + category.slice(1) : "All Categories"}
-                        </option>
-                    ))}
-                </select>
-            </div>
-            <div className="mb-4 px-4">
                 <label className="block mb-2 text-sm font-medium">Price Range</label>
                 <select
                     onChange={(e) => setPriceRange(e.target.value)}

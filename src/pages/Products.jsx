@@ -1,10 +1,11 @@
-import { useState, useMemo } from "react"
+import { useState, useMemo, useEffect } from "react"
 import useMeta from "../hooks/useMeta"
 import useFetch from "../hooks/useFetch"
 import Sidebar from "../components/common/Sidebar"
 import Card from "../components/product/Card"
 import Loading from "../components/common/Loading"
 import Pegination from "../components/common/Pegination"
+import { useParams } from "react-router-dom"
 
 const Products = () => {
 
@@ -15,10 +16,22 @@ const Products = () => {
 
     useMeta(metadata)
 
-    const [limit, setLimit] = useState(3)
+    const { categoryID } = useParams()
+    const [limit, setLimit] = useState(10)
     const [offset, setOffset] = useState(0)
+    const [productsPath, setProductsPath] = useState("/products")
 
-    const { data, loading } = useFetch(`/products?offset=${offset}&limit=${limit}`, [limit, offset])
+    const query = new URLSearchParams({ offset, limit }).toString()
+
+    useEffect(() => {
+        if (categoryID) {
+            setProductsPath(`/categories/${categoryID}/products`);
+        } else {
+            setProductsPath("/products");
+        }
+    }, [categoryID]);
+
+    const { data, loading } = useFetch(`${productsPath}?${query}`, [limit, offset, productsPath])
     const { data: totalData } = useFetch(`/products`)
     const memoizedData = useMemo(() => data, [data]);
 
@@ -37,9 +50,10 @@ const Products = () => {
                     limit={limit}
                     offset={offset}
                     setOffset={setOffset}
-                    totalData={totalData} />}
+                    totalData={totalData}
+                />
+            }
         </div>
-
     </main>)
 }
 

@@ -41,7 +41,7 @@ const Pagination = ({ totalData, limit, setOffset, offset }) => {
                 <button
                     onClick={() => setPage(index)}
                     key={index}
-                    className={`hover:bg-gray-300 text-gray-800 font-semibold py-2 px-4 ${active === index ? "bg-blue-500 text-slate-100 hover:bg-blue-300" : "bg-gray-200"}`}
+                    className={`text-gray-800 font-semibold py-2 px-4 ${active === index ? "bg-blue-500 text-slate-100 hover:bg-blue-300" : "bg-gray-200 hover:bg-gray-300"}`}
                 >
                     {index + 1}
                 </button>
