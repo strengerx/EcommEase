@@ -27,7 +27,7 @@ const SingleProduct = () => {
 
     return (<main className='bg-slate-200 shadow-md p-4 grid gap-4 m-4'>
         {data ?
-            <div className="rounded-lg p-6 grid gap-10 md:grid-cols-1/2">
+            <div className="rounded-lg grid gap-10 md:grid-cols-1/2">
                 {data?.images && data.images.length > 0 ?
                     <div className="carousel">
                         {data.images.map((image, index) => (

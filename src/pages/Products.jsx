@@ -34,13 +34,15 @@ const Products = () => {
         } else {
             setProductsPath(`/products`);
         }
-    }, [categoryID, query]);
+    }, [categoryID]);
 
-    const { data, loading, error } = useFetch(`${productsPath}?${query}`, [limit, offset, productsPath])
     const { data: totalData } = useFetch(`${productsPath}`)
+    const { data, loading, error } = useFetch(`${productsPath}?${query}`, [limit, offset, productsPath])
     const memoizedData = useMemo(() => data, [data]);
 
-    return (<main className="w-full grid grid-cols-1/4 gap-4 p-4">
+    console.log("object form product");
+
+    return (<main className="w-full grid lg:grid-cols-1/4 gap-4 p-4">
         <Sidebar setLimit={setLimit} />
 
         <div id="products" className="bg-slate-200 shadow-md p-4 grid gap-4 h-svh overflow-y-auto">
@@ -60,6 +62,7 @@ const Products = () => {
                 />
             }
         </div>
+
     </main>)
 }
 

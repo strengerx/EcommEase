@@ -1,12 +1,13 @@
 import { memo, useState, useEffect, useMemo } from "react";
 
 const Pagination = ({ totalData, limit, setOffset, offset }) => {
+    console.log("object from pegination");
 
     const dataLength = totalData && totalData.length > 0 ? totalData.length : 0
     const pages = Math.ceil(dataLength / limit)
 
     const pagesCollection = useMemo(() => new Array(pages).fill(0), [pages]);
-    const [active, setActive] = useState(0);
+    const [active, setActive] = useState(1);
 
     useEffect(() => {
         setActive(Math.floor(offset / limit));
