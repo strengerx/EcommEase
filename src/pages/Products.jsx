@@ -20,7 +20,7 @@ const Products = () => {
     const searchQuery = queryParams.get('query');
 
     const { categoryID } = useParams()
-    const [limit, setLimit] = useState(10)
+    const [limit, setLimit] = useState(50)
     const [offset, setOffset] = useState(0)
     const [productsPath, setProductsPath] = useState("/products")
 
