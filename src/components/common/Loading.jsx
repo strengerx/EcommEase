@@ -9,6 +9,6 @@ const Loading = () => {
             <span className="text-blue-500 text-xl font-medium">Loading...</span>
         </div>
     );
-}
+};
 
 export default Loading;

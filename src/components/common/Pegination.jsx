@@ -1,7 +1,6 @@
 import { memo, useState, useEffect, useMemo } from "react";
 
-const Pagination = ({ totalData, limit, setOffset, offset }) => {
-    console.log("object from pegination");
+const Pagination = ({ totalData, limit, setOffset, offset, refElem }) => {
 
     const dataLength = totalData && totalData.length > 0 ? totalData.length : 0
     const pages = Math.ceil(dataLength / limit)
@@ -10,8 +9,9 @@ const Pagination = ({ totalData, limit, setOffset, offset }) => {
     const [active, setActive] = useState(1);
 
     useEffect(() => {
+        refElem.scrollTop = 0
         setActive(Math.floor(offset / limit));
-    }, [offset, limit]);
+    }, [offset, limit, refElem]);
 
     const next = () => {
         if (active < pages - 1) {

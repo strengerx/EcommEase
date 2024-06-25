@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect } from "react";
 
 const useMeta = ({ title, description }) => {
     useEffect(() => {
@@ -9,8 +9,8 @@ const useMeta = ({ title, description }) => {
         if (description) {
             let metaDescription = document.querySelector('meta[name="description"]');
             if (!metaDescription) {
-                metaDescription = document.createElement('meta');
-                metaDescription.name = 'description';
+                metaDescription = document.createElement("meta");
+                metaDescription.name = "description";
                 document.head.appendChild(metaDescription);
             }
             metaDescription.content = description;
