@@ -20,7 +20,7 @@ const Search = ({
                 placeholder="Search products"
             />
             <button
-                className="md:px-6 px-3 text-lg py-2 bg-slate-300 text-slate-700 font-medium"
+                className="px-6 text-2xl py-2 bg-slate-300 text-slate-700 md:font-medium"
                 type="submit"
             >
                 {isNavOpen ? <IoIosSearch /> : "Search"}

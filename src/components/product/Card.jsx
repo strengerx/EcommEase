@@ -6,7 +6,7 @@ const Card = ({ product }) => {
             <img
                 src={product?.images[0]}
                 alt={product?.title}
-                className="w-80 h-56 object-cover rounded"
+                className="md:w-80 w-full h-56 object-cover rounded"
             />
             <div className="w-full flex flex-col justify-end gap-2">
                 <Link to={`/shop/${product?.id}`}>

@@ -1,8 +1,9 @@
 import { Link } from "react-router-dom";
 import useFetch from "../../hooks/useFetch";
+import { IoMdClose } from "react-icons/io";
 
-const Sidebar = ({ setLimit }) => {
-    // const priceRanges = ["", "0-50", "50-100", "100-200"];
+const Sidebar = ({ setLimit, isFilterOpen, handleFilterOpen }) => {
+
     const { data: categories } = useFetch("/categories", []);
     const topCategories =
         categories && categories.length > 0 ? categories.slice(0, 6) : [];
@@ -20,11 +21,14 @@ const Sidebar = ({ setLimit }) => {
     };
 
     return (
-        <aside className="bg-slate-200 shadow-md pt-4 pb-4 mb-6 h-full">
-            <h3 className="text-xl font-semibold text-slate-800 mb-4 px-6">
-                Filters
-            </h3>
-            <div className="flex flex-col items-start gap-3 mb-4 border-t-2 py-4 px-6 border-slate-100">
+        <aside className={`bg-slate-200 shadow-md pt-4 pb-4 mb-6 h-full w-[70%] md:w-full fixed top-0 ${isFilterOpen ? "left-0" : "-left-full"}  md:static z-50`}>
+            <div className="flex justify-between items-center">
+                <h3 className="text-xl font-semibold text-slate-800 px-6">
+                    Filters
+                </h3>
+                <p onClick={handleFilterOpen} className="text-gray-700 text-2xl font-bold mr-6 md:hidden"><IoMdClose /></p>
+            </div>
+            <div className="flex flex-col items-start gap-3 mb-4 border-t-2 py-4 px-6 mt-4 border-slate-100">
                 <h1 className="text-base font-medium">Limits</h1>
                 <ul>
                     {[10, 20, 30].map((limit) => (
