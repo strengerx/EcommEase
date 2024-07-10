@@ -6,7 +6,6 @@ const Loading = () => {
                 <div className="w-3 h-3 bg-blue-500 rounded-full animate-ping delay-200"></div>
                 <div className="w-3 h-3 bg-blue-500 rounded-full animate-ping delay-400"></div>
             </div>
-            <span className="text-blue-500 text-xl font-medium">Loading...</span>
         </div>
     );
 };
