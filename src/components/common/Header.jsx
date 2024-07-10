@@ -12,7 +12,7 @@ const Header = () => {
 
     const handleFormSubmit = (e) => {
         e.preventDefault();
-        navigate(`/products/search?query=${searchQuery}`);
+        navigate(`/shop/search?query=${searchQuery}`);
     };
 
     const [isNavOpen, setIsNavOpen] = useState(false);
@@ -45,18 +45,13 @@ const Header = () => {
                 />
                 <ul className="lg:flex gap-5 hidden">
                     <li>
-                        <Link className="text-slate-700 font-semibold" to={"/"}>
-                            Home
+                        <Link className="text-slate-700 font-semibold" to={"/shop"}>
+                            Shop
                         </Link>
                     </li>
                     <li>
                         <Link className="text-slate-700 font-semibold" to={"/about"}>
                             About
-                        </Link>
-                    </li>
-                    <li>
-                        <Link className="text-slate-700 font-semibold" to={"/products"}>
-                            Products
                         </Link>
                     </li>
                     <li>

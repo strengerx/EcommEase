@@ -5,6 +5,7 @@ import About from "./pages/About";
 import Home from "./pages/Home";
 import Products from "./pages/Products";
 import SingleProduct from "./components/product/SingleProduct";
+import PageNotFound from "./components/common/PageNotFound";
 import "./App.css";
 
 const App = () => {
@@ -15,12 +16,13 @@ const App = () => {
                 <Routes>
                     <Route path="/" element={<Home />} />
                     <Route path="/about" element={<About />} />
-                    <Route path="products">
+                    <Route path="shop">
                         <Route index element={<Products />} />
                         <Route path=":categoryID/:categoryName" element={<Products />} />
                         <Route path=":productID" element={<SingleProduct />} />
                         <Route path="search" element={<Products />} />
                     </Route>
+                    <Route path="*" element={<PageNotFound />} />
                 </Routes>
                 <Footer />
             </Router>

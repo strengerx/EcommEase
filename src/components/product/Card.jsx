@@ -9,7 +9,7 @@ const Card = ({ product }) => {
                 className="w-80 h-56 object-cover rounded"
             />
             <div className="w-full flex flex-col justify-end gap-2">
-                <Link to={`/products/${product?.id}`}>
+                <Link to={`/shop/${product?.id}`}>
                     <h3 className="text-lg text-blue-500 font-medium">
                         {product?.title}
                     </h3>

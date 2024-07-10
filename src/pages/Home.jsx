@@ -25,7 +25,7 @@ const Home = () => {
                 </p>
                 <div className="flex justify-center">
                     <a
-                        href="/products"
+                        href="/shop"
                         className="bg-slate-800 text-white py-2 px-4 rounded"
                     >
                         Shop Now

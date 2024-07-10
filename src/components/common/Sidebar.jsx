@@ -42,7 +42,7 @@ const Sidebar = ({ setLimit }) => {
                 <h1 className="text-base font-medium">Categories</h1>
                 <ul>
                     <li className="text-sm text-slate-600 font-medium cursor-pointer mb-2">
-                        <Link to={`/products`}> All Categories</Link>
+                        <Link to={`/shop`}> All Categories</Link>
                     </li>
                     {topCategories &&
                         topCategories.length > 0 &&
@@ -52,7 +52,7 @@ const Sidebar = ({ setLimit }) => {
                                 className="text-sm text-slate-600 font-medium cursor-pointer mb-2"
                             >
                                 <Link
-                                    to={`/products/${category.id}/${toLowerEmptySpace(
+                                    to={`/shop/${category.id}/${toLowerEmptySpace(
                                         category?.name
                                     )}`}
                                 >
