@@ -1,15 +1,14 @@
 import { memo, useState, useEffect, useMemo } from "react";
 
 const Pagination = ({ totalData, limit, setOffset, offset, refElem }) => {
-
-    const dataLength = totalData && totalData.length > 0 ? totalData.length : 0
-    const pages = Math.ceil(dataLength / limit)
+    const dataLength = totalData && totalData.length > 0 ? totalData.length : 0;
+    const pages = Math.ceil(dataLength / limit);
 
     const pagesCollection = useMemo(() => new Array(pages).fill(0), [pages]);
     const [active, setActive] = useState(1);
 
     useEffect(() => {
-        refElem.scrollTop = 0
+        refElem.scrollTop = 0;
         setActive(Math.floor(offset / limit));
     }, [offset, limit, refElem]);
 
@@ -42,7 +41,10 @@ const Pagination = ({ totalData, limit, setOffset, offset, refElem }) => {
                 <button
                     onClick={() => setPage(index)}
                     key={index}
-                    className={`text-gray-800 font-semibold py-2 px-4 ${active === index ? "bg-blue-500 text-slate-100 hover:bg-blue-300" : "bg-gray-200 hover:bg-gray-300"}`}
+                    className={`text-gray-800 font-semibold py-2 px-4 ${active === index
+                            ? "bg-blue-500 text-slate-100 hover:bg-blue-300"
+                            : "bg-gray-200 hover:bg-gray-300"
+                        }`}
                 >
                     {index + 1}
                 </button>

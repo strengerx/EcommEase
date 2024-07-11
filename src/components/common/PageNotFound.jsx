@@ -12,7 +12,7 @@ const PageNotFound = () => {
         <div className="flex flex-col items-center justify-center h-[80vh] bg-gray-100">
             <div className="text-6xl font-bold text-gray-800 mb-4">404</div>
             <div className="text-2xl text-gray-600 mb-8">Page Not Found</div>
-            <Link to="/" className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-lg transition-colors duration-300 ease-in-out">
+            <Link to={`/`} className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-lg transition-colors duration-300 ease-in-out">
                 Go Home
             </Link>
         </div>

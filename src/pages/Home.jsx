@@ -7,11 +7,19 @@ const Home = () => {
     const metadata = {
         title: "EcommEase - Your Ultimate Shopping Destination",
         description:
-            "Discover featured products and latest deals for seamless shopping experience.",
+            "Discover featured products and latest deals for a seamless shopping experience.",
     };
     useMeta(metadata);
 
-    const { data, loading } = useFetch("/products?offset=0&limit=6");
+    const { data, loading, error } = useFetch("/products?offset=0&limit=6");
+
+    if (loading) {
+        return <Loading />;
+    }
+
+    if (error) {
+        return <p className="text-lg text-center text-red-600">{error}</p>;
+    }
 
     return (
         <main className="max-w-7xl mx-auto p-4">
@@ -24,12 +32,12 @@ const Home = () => {
                     seamless shopping experience.
                 </p>
                 <div className="flex justify-center">
-                    <a
-                        href="/shop"
+                    <Link
+                        to="/shop"
                         className="bg-slate-800 text-white py-2 px-4 rounded"
                     >
                         Shop Now
-                    </a>
+                    </Link>
                 </div>
             </section>
 
@@ -37,38 +45,34 @@ const Home = () => {
                 <h2 className="text-3xl font-bold text-slate-800 mb-4">
                     Featured Products
                 </h2>
-                {loading ? (
-                    <Loading />
-                ) : (
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                        {data && data.length > 0 ? (
-                            data.map((product) => (
-                                <div
-                                    key={product.id}
-                                    className="bg-slate-200 rounded-lg shadow-lg"
-                                >
-                                    <img
-                                        src={product.images[0]}
-                                        alt={product.title}
-                                        className="w-full h-48 object-cover rounded-t-lg"
-                                    />
-                                    <div className="p-4">
-                                        <h3 className="text-lg text-blue-500 font-medium">
-                                            <Link to={`/products/${product?.id}`}>
-                                                {product.title}
-                                            </Link>
-                                        </h3>
-                                        <p className="text-slate-800 text-lg mt-1">
-                                            &#8377; {product.price}
-                                        </p>
-                                    </div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {data && data.length > 0 ? (
+                        data.map((product) => (
+                            <div
+                                key={product.id}
+                                className="bg-slate-200 rounded-lg shadow-lg"
+                            >
+                                <img
+                                    src={product.images[0]}
+                                    alt={product.title}
+                                    className="w-full h-48 object-cover rounded-t-lg"
+                                />
+                                <div className="p-4">
+                                    <h3 className="text-lg text-blue-500 font-medium">
+                                        <Link to={`/shop/${product.id}`}>
+                                            {product.title}
+                                        </Link>
+                                    </h3>
+                                    <p className="text-slate-800 text-lg mt-1">
+                                        &#8377; {product.price}
+                                    </p>
                                 </div>
-                            ))
-                        ) : (
-                            <p>not found</p>
-                        )}
-                    </div>
-                )}
+                            </div>
+                        ))
+                    ) : (
+                        <p className="text-lg text-center">No products found.</p>
+                    )}
+                </div>
             </section>
 
             <section className="my-8">

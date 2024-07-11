@@ -81,20 +81,29 @@ const Products = () => {
                         Error fetching products: {error.message}
                     </p>
                 )}
-                {!loading && !error && (
+                {!loading && !error && memoizedData && (
                     <>
-                        <div className="flex justify-between items-end md:justify-end">
-                            <p onClick={toggleFilter} className="text-gray-700 text-sm font-bold mb-2 md:hidden cursor-pointer">Filters</p>
-                            <SortByPrice value={sortPrice} setFunction={setSortPrice} />
-                        </div>
-                        {memoizedData && memoizedData.length > 0 ? (
+                        {memoizedData.length > 0 && (
+                            <div className="flex justify-between items-end md:justify-end">
+                                <button
+                                    onClick={toggleFilter}
+                                    className="text-gray-700 text-sm bg-white px-4 py-1 border border-slate-400 md:hidden cursor-pointer"
+                                >
+                                    Filters
+                                </button>
+                                <SortByPrice value={sortPrice} setFunction={setSortPrice} />
+                            </div>
+                        )}
+
+                        {memoizedData.length > 0 ? (
                             memoizedData.map((product, index) => (
                                 <Card product={product} key={index} />
                             ))
                         ) : (
                             <p className="text-lg text-center">No products found.</p>
                         )}
-                        {memoizedData && memoizedData.length > 0 && (
+
+                        {memoizedData.length > 0 && (
                             <Pegination
                                 refElem={refElem.current}
                                 limit={limit}
@@ -105,6 +114,7 @@ const Products = () => {
                         )}
                     </>
                 )}
+
             </div>
         </main>
     );
