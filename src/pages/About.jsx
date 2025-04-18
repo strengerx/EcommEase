@@ -1,6 +1,6 @@
 import useMeta from "../hooks/useMeta";
 
-const About = () => {
+export default function About() {
     const metadata = {
         title: "EcommEase - Our Story",
         description:
@@ -141,6 +141,4 @@ const About = () => {
             </div>
         </div>
     );
-};
-
-export default About;
+}

@@ -1,14 +1,15 @@
-import { useState, useMemo, useEffect, useRef } from "react";
+import { useState, useMemo, useRef } from "react";
 import useMeta from "../hooks/useMeta";
 import useFetch from "../hooks/useFetch";
 import Sidebar from "../components/common/Sidebar";
 import Card from "../components/product/Card";
 import Loading from "../components/common/Loading";
 import Pegination from "../components/common/Pegination";
-import { useLocation, useParams } from "react-router-dom";
 import SortByPrice from "../components/common/SortByPrice";
+import sortProducts from "../utilities/sortProducts";
+import useProductQuery from "../hooks/useProductQuery";
 
-const Products = () => {
+export default function Products() {
 
     const metadata = {
         title: "EcommEase - Explore Our Collection",
@@ -17,50 +18,18 @@ const Products = () => {
 
     useMeta(metadata);
 
-    const currentLocation = useLocation();
-    const queryParams = new URLSearchParams(currentLocation.search);
-    const searchQuery = queryParams.get("query");
-
-    const { categoryID } = useParams();
     const refElem = useRef();
     const [limit, setLimit] = useState(100);
     const [offset, setOffset] = useState(0);
     const [sortPrice, setSortPrice] = useState("default")
-    const [productsPath, setProductsPath] = useState("/products");
     const [isFilterOpen, setIsFilterOpen] = useState(false)
 
-    const query = useMemo(() => {
-        const customParams = searchQuery ? { title: searchQuery } : { limit, offset };
-        return new URLSearchParams(customParams).toString();
-    }, [limit, offset, searchQuery]);
-
-    useEffect(() => {
-        setOffset(0);
-        const calculateProductsPath = (categoryID) => {
-            return categoryID ? `/categories/${categoryID}/products` : `/products`;
-        };
-        setProductsPath(calculateProductsPath(categoryID))
-    }, [categoryID]);
+    const { productsPath, query } = useProductQuery(limit, offset)
 
     const { data: totalData } = useFetch(`${productsPath}`);
-    const { data, loading, error } = useFetch(`${productsPath}?${query}`, [
-        limit,
-        offset,
-        productsPath,
-    ]);
+    const { data, loading, error } = useFetch(`${productsPath}?${query}`, [limit, offset, productsPath,]);
 
-    const sortData = (dataClone) => {
-        if (!data) return [];
-        const sortedData = [...dataClone];
-        if (sortPrice === "toHigh") {
-            return sortedData.sort((a, b) => a.price - b.price);
-        } else if (sortPrice === "toLow") {
-            return sortedData.sort((a, b) => b.price - a.price);
-        }
-        return sortedData;
-    };
-
-    const memoizedData = useMemo(() => sortData(data), [data, sortPrice, sortData]);
+    const memoizedData = useMemo(() => sortProducts(data, sortPrice), [data, sortPrice, sortProducts]);
 
     const toggleFilter = () => {
         setIsFilterOpen((prevState) => !prevState);
@@ -68,7 +37,11 @@ const Products = () => {
 
     return (
         <main className="w-full grid lg:grid-cols-1/4 gap-4 md:px-4 py-4">
-            <Sidebar handleFilterOpen={toggleFilter} isFilterOpen={isFilterOpen} setLimit={setLimit} />
+            <Sidebar
+                handleFilterOpen={toggleFilter}
+                isFilterOpen={isFilterOpen}
+                setLimit={setLimit}
+            />
 
             <div
                 id="products"
@@ -96,8 +69,8 @@ const Products = () => {
                         )}
 
                         {memoizedData.length > 0 ? (
-                            memoizedData.map((product, index) => (
-                                <Card product={product} key={index} />
+                            memoizedData.map((product) => (
+                                <Card product={product} key={product.id} />
                             ))
                         ) : (
                             <p className="text-lg text-center">No products found.</p>
@@ -105,7 +78,7 @@ const Products = () => {
 
                         {memoizedData.length > 0 && (
                             <Pegination
-                                refElem={refElem.current}
+                                refElem={refElem}
                                 limit={limit}
                                 offset={offset}
                                 setOffset={setOffset}
@@ -118,6 +91,4 @@ const Products = () => {
             </div>
         </main>
     );
-};
-
-export default Products;
+}

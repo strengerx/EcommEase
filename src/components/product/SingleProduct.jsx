@@ -4,7 +4,7 @@ import useFetch from "../../hooks/useFetch";
 import useMeta from "../../hooks/useMeta";
 import Loading from "../common/Loading";
 
-const SingleProduct = () => {
+export default function SingleProduct() {
     const { productID } = useParams();
     const { data, error, loading } = useFetch(`/products/${productID}`);
     const [activeImage, setActiveImage] = useState(0);
@@ -73,6 +73,4 @@ const SingleProduct = () => {
             </div>
         </main>
     );
-};
-
-export default SingleProduct;
+}

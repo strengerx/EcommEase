@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 
-const useMeta = ({ title, description }) => {
+export default function useMeta({ title, description }) {
     useEffect(() => {
         if (title) {
             document.title = title;
@@ -16,6 +16,4 @@ const useMeta = ({ title, description }) => {
             metaDescription.content = description;
         }
     }, [title, description]);
-};
-
-export default useMeta;
+}

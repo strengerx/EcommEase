@@ -1,4 +1,4 @@
-const SortByPrice = ({ value, setFunction }) => {
+export default function SortByPrice({ value, setFunction }) {
     return (
         <div className="max-w-xs">
             <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="sort">
@@ -16,6 +16,4 @@ const SortByPrice = ({ value, setFunction }) => {
             </select>
         </div>
     );
-};
-
-export default SortByPrice;
+}

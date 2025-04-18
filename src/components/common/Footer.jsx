@@ -1,4 +1,4 @@
-const Footer = () => {
+export default function Footer() {
     return (
         <footer className="w-full px-14 py-3 flex items-center justify-center flex-col gap-2 bg-slate-200">
             <p className=" text-base text-center text-slate-700 font-medium">
@@ -14,6 +14,5 @@ const Footer = () => {
             </nav>
         </footer>
     );
-};
+}
 
-export default Footer;

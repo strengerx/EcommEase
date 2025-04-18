@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import useMeta from '../../hooks/useMeta';
 
-const PageNotFound = () => {
+export default function PageNotFound() {
 
     useMeta({
         title: `404 - Page Not Found | EcommEase`,
@@ -17,6 +17,4 @@ const PageNotFound = () => {
             </Link>
         </div>
     );
-};
-
-export default PageNotFound
+}

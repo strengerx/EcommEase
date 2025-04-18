@@ -1,6 +1,6 @@
 import { memo, useState, useEffect, useMemo } from "react";
 
-const Pagination = ({ totalData, limit, setOffset, offset, refElem }) => {
+function Pagination({ totalData, limit, setOffset, offset, refElem }) {
     const dataLength = totalData && totalData.length > 0 ? totalData.length : 0;
     const pages = Math.ceil(dataLength / limit);
 
@@ -42,8 +42,8 @@ const Pagination = ({ totalData, limit, setOffset, offset, refElem }) => {
                     onClick={() => setPage(index)}
                     key={index}
                     className={`text-gray-800 font-semibold py-2 px-4 ${active === index
-                            ? "bg-blue-500 text-slate-100 hover:bg-blue-300"
-                            : "bg-gray-200 hover:bg-gray-300"
+                        ? "bg-blue-500 text-slate-100 hover:bg-blue-300"
+                        : "bg-gray-200 hover:bg-gray-300"
                         }`}
                 >
                     {index + 1}
@@ -58,6 +58,6 @@ const Pagination = ({ totalData, limit, setOffset, offset, refElem }) => {
             </button>
         </div>
     );
-};
+}
 
 export default memo(Pagination);

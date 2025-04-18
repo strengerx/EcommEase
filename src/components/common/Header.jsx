@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Search from "./Search";
 
-const Header = () => {
+export default function Header() {
     const [isNavOpen, setIsNavOpen] = useState(window.innerWidth <= 768);
 
     const handleResize = () => {
@@ -59,6 +59,4 @@ const Header = () => {
             </nav>
         </header>
     );
-};
-
-export default Header;
+}

@@ -4,7 +4,7 @@ import { useCallback } from "react";
 import useFetch from "../../hooks/useFetch";
 import { IoMdClose } from "react-icons/io";
 
-const Sidebar = ({ setLimit, isFilterOpen, handleFilterOpen }) => {
+export default function Sidebar({ setLimit, isFilterOpen, handleFilterOpen }) {
     const { data: categories } = useFetch("/categories", []);
     const topCategories = categories && categories.length > 0 ? categories.slice(0, 6) : [];
 
@@ -80,13 +80,10 @@ const Sidebar = ({ setLimit, isFilterOpen, handleFilterOpen }) => {
             </div>
         </aside>
     );
-};
+}
 
 Sidebar.propTypes = {
     setLimit: PropTypes.func.isRequired,
     isFilterOpen: PropTypes.bool.isRequired,
     handleFilterOpen: PropTypes.func.isRequired,
 };
-
-export default Sidebar;
-

@@ -8,7 +8,7 @@ import SingleProduct from "./components/product/SingleProduct";
 import PageNotFound from "./components/common/PageNotFound";
 import "./App.css";
 
-const App = () => {
+export default function App() {
     return (
         <>
             <Router>
@@ -28,6 +28,4 @@ const App = () => {
             </Router>
         </>
     );
-};
-
-export default App;
+}

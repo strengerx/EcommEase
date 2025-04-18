@@ -2,7 +2,7 @@ import { IoIosSearch } from "react-icons/io";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-const Search = () => {
+export default function Search() {
     const navigate = useNavigate();
 
     const [searchQuery, setSearchQuery] = useState("");
@@ -49,6 +49,4 @@ const Search = () => {
             </button>
         </form>
     );
-};
-
-export default Search;
+}

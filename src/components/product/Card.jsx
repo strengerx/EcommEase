@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
-const Card = ({ product }) => {
+export default function Card({ product }) {
     const { id, title, description, price, images } = product || {};
 
     return (
@@ -24,7 +24,7 @@ const Card = ({ product }) => {
             </div>
         </div>
     );
-};
+}
 
 Card.propTypes = {
     product: PropTypes.shape({
@@ -35,5 +35,3 @@ Card.propTypes = {
         images: PropTypes.arrayOf(PropTypes.string).isRequired,
     }).isRequired,
 };
-
-export default Card;
